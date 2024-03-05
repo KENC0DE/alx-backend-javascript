@@ -12,7 +12,7 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
     } else {
       response.push({
         status: ans.status,
-        value: `Error: ${ans.reason}`,
+        value: `Error: ${ans[1].reason.message}`,
       });
     }
     return response;
