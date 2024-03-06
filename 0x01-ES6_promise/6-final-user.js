@@ -7,17 +7,21 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
 
   return Promise.allSettled([user, photo]).then((ans) => {
     const response = [];
-    if (ans.status === 'fulfilled') {
-      response.push({
-        status: ans.status,
-        value: ans.value,
-      });
-    } else {
-      response.push({
-        status: ans.status,
-        value: ans.reason.toString(),
-      });
+
+    for (const an of ans) {
+      if (ans.status === 'fulfilled') {
+        response.push({
+          status: an.status,
+          value: an.value,
+        });
+      } else {
+        response.push({
+          status: an.status,
+          value: an.reason.toString(),
+        });
+      }
     }
+
     return response;
   });
 }
