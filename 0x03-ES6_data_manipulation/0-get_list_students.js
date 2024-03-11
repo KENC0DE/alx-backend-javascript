@@ -15,6 +15,6 @@ export default function getListStudents() {
     location: 'San Francisco',
   };
 
-  const list = { st1, st2, st3 };
+  const list = [st1, st2, st3];
   return list;
 }
