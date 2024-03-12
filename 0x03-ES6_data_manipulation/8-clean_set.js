@@ -1,14 +1,11 @@
-export default function cleanSet(set, str) {
-  if (!str || typeof str !== 'string' || typeof set !== 'object') return '';
-  let string = '';
+export default function cleanSet(set, startString) {
+  if (!startString || typeof startString !== 'string' || typeof set !== 'object') return '';
+  const string = [];
   set.forEach((e) => {
-    if (str !== '' && e.startsWith(str)) {
-      string += e.slice(str.length);
-      string += '-';
+    if (e.startsWith(startString)) {
+      string.push(e.slice(startString.length));
     }
   });
 
-  string = string.slice(0, -1);
-
-  return string;
+  return string.join('-');
 }
