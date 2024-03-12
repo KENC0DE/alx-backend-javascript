@@ -1,4 +1,7 @@
 export default function cleanSet(set, str) {
+  if (str === '') {
+    return '';
+  }
   const string = [];
   set.forEach((e) => {
     if (e.startsWith(str)) {
