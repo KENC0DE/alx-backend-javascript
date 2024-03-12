@@ -1,4 +1,5 @@
 export default function cleanSet(set, str) {
+  if (!str || typeof str !== 'string' || typeof set !== 'object') return '';
   let string = '';
   set.forEach((e) => {
     if (str !== '' && e.startsWith(str)) {
