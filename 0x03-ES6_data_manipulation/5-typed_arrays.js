@@ -10,5 +10,7 @@ export default function createInt8TypedArray(length, position, value) {
 
   const view = new DataView(int8buff);
 
-  return { view, array8 };
+  array8.toString = () => `${view}`;
+
+  return array8;
 }
