@@ -1,6 +1,6 @@
 export default function createInt8TypedArray(length, position, value) {
   if (position < 0 || position >= length) {
-    return new Error('Position outside range');
+    throw Error('Position outside range');
   }
 
   const int8buff = new ArrayBuffer(length);
