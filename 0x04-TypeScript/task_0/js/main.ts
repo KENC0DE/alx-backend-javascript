@@ -19,12 +19,41 @@ const student2: Student = {
   location: 'Zambia',
 };
 
-const studentsList: Array<Student> = [student1, student2];
+const studentsList: Student[] = [student1, student2];
 
-const table: [string, string][] = [];
 
-studentsList.forEach((student) => {
-  table.push([student.firstName, student.location]);
+// Create a new table element
+const table = document.createElement('table');
+
+// Create the table header row
+const headerRow = document.createElement('tr');
+
+// Add header cells
+const headers = ['firstName', 'location'];
+headers.forEach(header => {
+  const th = document.createElement('th');
+  th.textContent = header;
+  headerRow.appendChild(th);
 });
 
-console.log(table);
+// Append the header row to the table
+table.appendChild(headerRow);
+
+studentsList.forEach(row => {
+  const tr = document.createElement('tr');
+
+  // Create data cells
+  const nameCell = document.createElement('td');
+  nameCell.textContent = row.firstName;
+  tr.appendChild(nameCell);
+
+  const locationCell = document.createElement('td');
+  locationCell.textContent = row.location;
+  tr.appendChild(locationCell);
+
+  // Append the data row to the table
+  table.appendChild(tr);
+});
+
+
+document.body.appendChild(table);
