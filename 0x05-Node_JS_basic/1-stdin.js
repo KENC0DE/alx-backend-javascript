@@ -7,6 +7,6 @@ process.stdin.on('data', (chunk) => {
   console.log(`Your name is: ${name}`);
 });
 
-process.on('exit', () => {
+process.stdin.on('end', () => {
   console.log('This important software is now closing');
 });
