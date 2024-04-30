@@ -1,28 +1,27 @@
-const fs = require('fs');
+const { readFile } = require('fs');
 
-async function readDatabase(dbName) {
+function readDatabase(filePath) {
   return new Promise((resolve, reject) => {
-    fs.readFile(dbName, 'utf8', (err, data) => {
-      if (err) {
-        reject(err);
-        return;
-      }
+    readFile(filePath, 'utf8', (err, data) => {
+      if (err) reject(err);
 
-      const stdList = data.split('\n').slice(1, -1);
-      const ldb = [];
+      const dataArray = data.trim().split('\n').map((row) => row.split(','));
+      const students = dataArray.slice(1);
       const fields = {};
-      for (const l of stdList) {
-        const temp = l.split(',');
-        ldb.push(temp);
-        fields[temp[temp.length - 1]] = [];
-      }
-      for (const s of ldb) {
-        if (s[s.length - 1] === 'CS') fields.CS.push(s[0]);
-        else if (s[s.length - 1] === 'SWE') fields.SWE.push(s[0]);
-      }
+
+      students.forEach((student) => {
+        const field = student[3];
+        const firstName = student[0];
+        if (!fields[field]) {
+          fields[field] = [];
+        }
+        fields[field].push(firstName);
+      });
       resolve(fields);
     });
   });
 }
 
 module.exports = readDatabase;
+
+// readDatabase('../database.csv').then((output) => console.log(output));
